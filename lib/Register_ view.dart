@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:onehabit/Dashboard.dart';
+import 'package:onehabit/Models/Registration_model.dart';
 import 'package:onehabit/themes/color.dart';
 
-class Register extends StatefulWidget {
-  const Register({Key? key}) : super(key: key);
+class RegisterView extends StatefulWidget {
+  const RegisterView({Key? key}) : super(key: key);
 
   @override
-  State<Register> createState() => _RegisterState();
+  State<RegisterView> createState() => _RegisterViewState();
 }
 
-class _RegisterState extends State<Register> {
+class _RegisterViewState extends State<RegisterView> {
   var styleInput = const TextStyle(color: Colors.white);
+  var email = TextEditingController();
+  var password = TextEditingController();
+  var name = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +31,7 @@ class _RegisterState extends State<Register> {
           SizedBox(
             width: 250,
             child: TextField(
+              controller: name,
               decoration: new InputDecoration(
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Purple, width: 4.0),
@@ -45,6 +50,7 @@ class _RegisterState extends State<Register> {
           SizedBox(
             width: 250,
             child: TextField(
+              controller: email,
               decoration: new InputDecoration(
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Purple, width: 4.0),
@@ -63,6 +69,7 @@ class _RegisterState extends State<Register> {
           SizedBox(
             width: 250,
             child: TextField(
+              controller: password,
               decoration: new InputDecoration(
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Purple, width: 4.0),
@@ -80,10 +87,13 @@ class _RegisterState extends State<Register> {
           ),
           TextButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const Dashboard()),
-              );
+              // TODO: Add verification to the fields. Make sure that they aren't empty
+              var isUserRegistered = RegistrationModel()
+                  .registerWithEmail(name.text, email.text, password.text);
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => const Dashboard()),
+              // );
             },
             style: ButtonStyle(
               foregroundColor: MaterialStateProperty.all<Color>(Purple),

@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:onehabit/Login.dart';
-import 'package:onehabit/Register.dart';
-
+import 'package:onehabit/Register_%20view.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 import './themes/color.dart';
 
-void main() {
+Future<void> main() async {
   runApp(const MyApp());
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -104,7 +108,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const Register()),
+                      MaterialPageRoute(
+                          builder: (context) => const RegisterView()),
                     );
                   },
                   style: ButtonStyle(
