@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:onehabit/Dashboard.dart';
-import 'package:onehabit/ForgotPassword.dart';
+import 'package:onehabit/Login.dart';
 import 'package:onehabit/themes/color.dart';
 
-class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+class ForgotPassword extends StatefulWidget {
+  const ForgotPassword({Key? key}) : super(key: key);
 
   @override
-  State<Login> createState() => _LoginState();
+  State<ForgotPassword> createState() => _ForgotPasswordState();
 }
 
-class _LoginState extends State<Login> {
-  var styleInput = const TextStyle(color: Purple);
+class _ForgotPasswordState extends State<ForgotPassword> {
   var _isObscure = true;
-
   @override
   Widget build(BuildContext context) {
     var iconObscure = IconButton(
@@ -42,9 +39,9 @@ class _LoginState extends State<Login> {
             ),
           ]),
           SizedBox(width: 250),
-          Icon(Icons.person, color: Purple, size: 80),
+          Icon(Icons.password, color: Purple, size: 80),
           const Text(
-            'Login',
+            'Reset Password',
             style: TextStyle(fontFamily: 'outfit', fontSize: 55),
           ),
           SizedBox(
@@ -76,7 +73,27 @@ class _LoginState extends State<Login> {
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Purple, width: 3.0),
                 ),
-                hintText: 'Enter your password',
+                hintText: 'Enter new password',
+                prefixIcon: Icon(
+                  Icons.lock,
+                  color: Purple,
+                ),
+                suffixIcon: iconObscure,
+              ),
+            ),
+          ),
+          SizedBox(
+            width: 280,
+            child: TextFormField(
+              obscureText: _isObscure,
+              decoration: new InputDecoration(
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Purple, width: 4.0),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Purple, width: 3.0),
+                ),
+                hintText: 'Confirm password',
                 prefixIcon: Icon(
                   Icons.lock,
                   color: Purple,
@@ -89,7 +106,7 @@ class _LoginState extends State<Login> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const Dashboard()),
+                MaterialPageRoute(builder: (context) => const Login()),
               );
             },
             style: ButtonStyle(
@@ -104,37 +121,8 @@ class _LoginState extends State<Login> {
                 ),
               )),
             ),
-            child: const Text("Login"),
+            child: const Text("Reset"),
           ),
-          SizedBox(
-              child:
-                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-              const Text(
-                "Forgot Password?",
-                style: TextStyle(
-                  fontFamily: 'bevietnampro',
-                  fontSize: 12,
-                  color: Colors.grey,
-                ),
-              ),
-            ]),
-            Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-              TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const ForgotPassword()),
-                  );
-                },
-                style: ButtonStyle(
-                  foregroundColor: MaterialStateProperty.all<Color>(Purple),
-                ),
-                child: const Text("Reset"),
-              ),
-            ])
-          ])),
         ]),
       ),
     );

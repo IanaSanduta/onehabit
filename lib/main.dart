@@ -42,6 +42,9 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
+            SizedBox(
+              height: 25,
+            ),
             Image.asset(
               'assets/images/newLogo.png',
               height: 300,
