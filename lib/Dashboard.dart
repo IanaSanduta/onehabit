@@ -20,19 +20,41 @@ class _DashboardState extends State<Dashboard> {
 
   @override
   Widget build(BuildContext context) {
+    const TextStyle optionStyle =
+        // TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+        TextStyle(fontFamily: 'outfit', fontSize: 15);
+    const List<Widget> _widgetOptions = <Widget>[
+      Text(
+        'Index 0: Home',
+        style: optionStyle,
+      ),
+      Text(
+        'Index 1: Business',
+        style: optionStyle,
+      ),
+      Text(
+        'Index 2: School',
+        style: optionStyle,
+      ),
+      Text(
+        'Index 0: Home',
+        style: optionStyle,
+      ),
+    ];
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        /*shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              bottomRight: Radius.circular(25),
+              bottomLeft: Radius.circular(25)),
+        ),*/
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
       body: Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-          Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-            SizedBox(width: 15),
-            IconButton(
-              icon: Icon(Icons.menu, color: Purple, size: 30),
-              onPressed: () {
-                Navigator.pop(context);
-                //ModalRoute.of(context)?.canPop
-              },
-            ),
-          ]),
+          SizedBox(height: 50),
           Card(
             elevation: 0,
             shape: RoundedRectangleBorder(
@@ -58,7 +80,11 @@ class _DashboardState extends State<Dashboard> {
           ),
         ]),
       ),
-      bottomNavigationBar: SalomonBottomBar(
+      bottomNavigationBar: BottomNavBar(),
+    );
+  }
+
+  BottomNavBar() => SalomonBottomBar(
         currentIndex: _currentIndex,
         onTap: (i) => setState(() => _currentIndex = i),
         items: [
@@ -90,7 +116,5 @@ class _DashboardState extends State<Dashboard> {
             selectedColor: Colors.teal,
           ),
         ],
-      ),
-    );
-  }
+      );
 }

@@ -45,11 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
             SizedBox(
               height: 25,
             ),
-            Image.asset(
-              'assets/images/newLogo.png',
-              height: 300,
-              width: 400,
-            ),
+            ImageLogo(),
             // <-- SEE HERE
             const Text(
               'One habit',
@@ -66,27 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ),
-            TextButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Login()),
-                );
-              },
-              style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all<Color>(Purple),
-                padding: MaterialStateProperty.all<EdgeInsets>(
-                    EdgeInsets.only(left: 40, right: 40, top: 20, bottom: 20)),
-                shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.0),
-                  side: BorderSide(
-                    color: Purple,
-                    width: 3.0,
-                  ),
-                )),
-              ),
-              child: const Text("Login"),
-            ),
+            LoginButton(),
             SizedBox(
                 child:
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -103,18 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ]),
               Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Register()),
-                    );
-                  },
-                  style: ButtonStyle(
-                    foregroundColor: MaterialStateProperty.all<Color>(Purple),
-                  ),
-                  child: const Text("Register"),
-                ),
+                RegisterButton(),
               ])
             ])),
           ],
@@ -122,4 +87,45 @@ class _MyHomePageState extends State<MyHomePage> {
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
+
+  ImageLogo() => Image.asset(
+        'assets/images/newLogo.png',
+        height: 300,
+        width: 400,
+      );
+
+  LoginButton() => TextButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const Login()),
+          );
+        },
+        style: ButtonStyle(
+          foregroundColor: MaterialStateProperty.all<Color>(Purple),
+          padding: MaterialStateProperty.all<EdgeInsets>(
+              EdgeInsets.only(left: 40, right: 40, top: 20, bottom: 20)),
+          shape: MaterialStateProperty.all(RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30.0),
+            side: BorderSide(
+              color: Purple,
+              width: 3.0,
+            ),
+          )),
+        ),
+        child: const Text("Login"),
+      );
+
+  RegisterButton() => TextButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const Register()),
+          );
+        },
+        style: ButtonStyle(
+          foregroundColor: MaterialStateProperty.all<Color>(Purple),
+        ),
+        child: const Text("Register"),
+      );
 }
