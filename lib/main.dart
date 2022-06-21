@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:onehabit/Login.dart';
-import 'package:onehabit/Register.dart';
-
+import 'package:onehabit/Register_%20view.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 import './themes/color.dart';
 
-void main() {
+Future<void> main() async {
   runApp(const MyApp());
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -42,10 +46,11 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            SizedBox(
-              height: 25,
+            Image.asset(
+              'assets/images/newLogo.png',
+              height: 300,
+              width: 400,
             ),
-            ImageLogo(),
             // <-- SEE HERE
             const Text(
               'One habit',
@@ -62,7 +67,27 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ),
-            LoginButton(),
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Login()),
+                );
+              },
+              style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.all<Color>(Purple),
+                padding: MaterialStateProperty.all<EdgeInsets>(
+                    EdgeInsets.only(left: 40, right: 40, top: 20, bottom: 20)),
+                shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                  side: BorderSide(
+                    color: Purple,
+                    width: 3.0,
+                  ),
+                )),
+              ),
+              child: const Text("Login"),
+            ),
             SizedBox(
                 child:
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -79,7 +104,19 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ]),
               Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-                RegisterButton(),
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const RegisterView()),
+                    );
+                  },
+                  style: ButtonStyle(
+                    foregroundColor: MaterialStateProperty.all<Color>(Purple),
+                  ),
+                  child: const Text("Register"),
+                ),
               ])
             ])),
           ],
