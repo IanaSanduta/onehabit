@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:onehabit/Login.dart';
-import 'package:onehabit/Register_%20view.dart';
+import 'package:onehabit/Views/Login.dart';
+import 'package:onehabit/Views/Register_%20view.dart';
 import 'package:firebase_core/firebase_core.dart';
+
+import 'Views/Login.dart';
 import 'firebase_options.dart';
 import './themes/color.dart';
 
