@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:onehabit/Models/Registration_model.dart';
 import 'package:onehabit/themes/color.dart';
 
-import 'Dashboard.dart';
+import '../Dashboard.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({Key? key}) : super(key: key);
