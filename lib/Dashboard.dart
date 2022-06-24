@@ -17,6 +17,25 @@ class _DashboardState extends State<Dashboard> {
       _selectedIndex = index;
     });
   }
+/*
+  @override
+  void initState() {
+    super.initState();
+    BackButtonInterceptor.add(myInterceptor);
+  }
+
+  @override
+  void dispose() {
+    BackButtonInterceptor.remove(myInterceptor);
+    super.dispose();
+  }
+
+  bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
+    print("BACK BUTTON!"); // Do some stuff.
+    return true;
+  }
+
+ */
 
   @override
   Widget build(BuildContext context) {
@@ -43,13 +62,8 @@ class _DashboardState extends State<Dashboard> {
     ];
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
-        /*shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-              bottomRight: Radius.circular(25),
-              bottomLeft: Radius.circular(25)),
-        ),*/
-        backgroundColor: Colors.transparent,
+        //automaticallyImplyLeading: false,
+        backgroundColor: Colors.blue,
         elevation: 0,
       ),
       body: Center(
