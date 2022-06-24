@@ -1,11 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:onehabit/Views/Login.dart';
-import 'package:onehabit/Views/Register_%20view.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+import 'package:onehabit/Login.dart';
+import 'package:onehabit/Views/Register_%20view.dart';
 
-import 'Views/Login.dart';
-import 'firebase_options.dart';
 import './themes/color.dart';
+import 'firebase_options.dart';
 
 Future<void> main() async {
   runApp(const MyApp());
@@ -48,12 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Image.asset(
-              'assets/images/newLogo.png',
-              height: 300,
-              width: 400,
-            ),
-            // <-- SEE HERE
+            ImageLogo(),
             const Text(
               'One habit',
               style: TextStyle(fontFamily: 'outfit', fontSize: 55),
@@ -69,27 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ),
-            TextButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Login()),
-                );
-              },
-              style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all<Color>(Purple),
-                padding: MaterialStateProperty.all<EdgeInsets>(
-                    EdgeInsets.only(left: 40, right: 40, top: 20, bottom: 20)),
-                shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.0),
-                  side: BorderSide(
-                    color: Purple,
-                    width: 3.0,
-                  ),
-                )),
-              ),
-              child: const Text("Login"),
-            ),
+            LoginButton(),
             SizedBox(
                 child:
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -106,19 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ]),
               Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const RegisterView()),
-                    );
-                  },
-                  style: ButtonStyle(
-                    foregroundColor: MaterialStateProperty.all<Color>(Purple),
-                  ),
-                  child: const Text("Register"),
-                ),
+                RegisterButton(),
               ])
             ])),
           ],
@@ -126,4 +88,45 @@ class _MyHomePageState extends State<MyHomePage> {
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
+
+  ImageLogo() => Image.asset(
+        'assets/images/newLogo.png',
+        height: 300,
+        width: 400,
+      );
+
+  LoginButton() => TextButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const Login()),
+          );
+        },
+        style: ButtonStyle(
+          foregroundColor: MaterialStateProperty.all<Color>(Purple),
+          padding: MaterialStateProperty.all<EdgeInsets>(
+              EdgeInsets.only(left: 40, right: 40, top: 20, bottom: 20)),
+          shape: MaterialStateProperty.all(RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30.0),
+            side: BorderSide(
+              color: Purple,
+              width: 3.0,
+            ),
+          )),
+        ),
+        child: const Text("Login"),
+      );
+
+  RegisterButton() => TextButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const RegisterView()),
+          );
+        },
+        style: ButtonStyle(
+          foregroundColor: MaterialStateProperty.all<Color>(Purple),
+        ),
+        child: const Text("Register"),
+      );
 }
