@@ -38,16 +38,19 @@ class _LoginState extends State<Login> {
   var passwordController = TextEditingController();
   late String signInAlertTitle = "Authenticating";
   bool isButtonPressed = false;
+  bool isAuthenticationSuccess = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: Stack(
+          alignment: Alignment.center,
           children: [
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
+                _backButton(),
                 SizedBox(width: 250),
                 loginIcon,
                 loginText,
@@ -58,12 +61,25 @@ class _LoginState extends State<Login> {
             ),
             Visibility(
               child: errorAlert(),
-              visible: true,
+              visible: !isAuthenticationSuccess,
             ),
           ],
         ),
       ),
     );
+  }
+
+  Row _backButton() {
+    return Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+      SizedBox(width: 15),
+      IconButton(
+        icon: Icon(Icons.arrow_back, color: Purple, size: 30),
+        onPressed: () {
+          Navigator.pop(context);
+          //ModalRoute.of(context)?.canPop
+        },
+      ),
+    ]);
   }
 
   AlertDialog errorAlert() {
@@ -107,16 +123,18 @@ class _LoginState extends State<Login> {
       );
 
   Future<void> navigateToDashboard() async {
+    //isAuthenticationSuccess = false;
     isButtonPressed = true;
     print("Email to authenticate: " + emailController.text);
-    bool isSignedIn = (await Authentication()
+    isAuthenticationSuccess = (await Authentication()
         .signInWithEmail(emailController.text, passwordController.text));
-    if (isSignedIn) {
+    if (isAuthenticationSuccess) {
       isButtonPressed = false;
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => const Dashboard()),
       );
+      // isAuthenticationSuccess = false;
     } else {
       signInAlertTitle = "Error signing in...";
       print("Error signing in... " + errorMessage);

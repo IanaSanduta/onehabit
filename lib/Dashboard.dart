@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:onehabit/Home_on_dashboard.dart';
+import 'package:onehabit/Stats_on_dashboard.dart';
 import 'package:onehabit/themes/color.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+
+import 'Tasks_on_dashboard.dart';
+import 'Timer_on_dashboard.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -10,13 +15,21 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-  int _selectedIndex = 0;
   var _currentIndex = 0;
-  void _onItemTapped(int index) {
+  static const TextStyle optionStyle =
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static const List _widgetOptions = <Widget>[
+    Home_on_dashboard(),
+    Tasks_on_dashboard(),
+    Stats_on_dashboard(),
+    Timer_on_dashboard(),
+  ];
+
+  /*void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
-  }
+  }*/
 /*
   @override
   void initState() {
@@ -39,62 +52,23 @@ class _DashboardState extends State<Dashboard> {
 
   @override
   Widget build(BuildContext context) {
-    const TextStyle optionStyle =
-        // TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-        TextStyle(fontFamily: 'outfit', fontSize: 15);
-    const List<Widget> _widgetOptions = <Widget>[
-      Text(
-        'Index 0: Home',
-        style: optionStyle,
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      Text(
-        'Index 1: Business',
-        style: optionStyle,
+      home: Scaffold(
+        /*appBar: AppBar(
+            // automaticallyImplyLeading: false,
+            //backgroundColor: Colors.transparent,
+            //elevation: 0,
+            ),*/
+        body: Center(
+          child: _widgetOptions.elementAt(_currentIndex),
+        ),
+        bottomNavigationBar: BottomNavBar(),
       ),
-      Text(
-        'Index 2: School',
-        style: optionStyle,
-      ),
-      Text(
-        'Index 0: Home',
-        style: optionStyle,
-      ),
-    ];
-    return Scaffold(
-      appBar: AppBar(
-        //automaticallyImplyLeading: false,
-        backgroundColor: Colors.blue,
-        elevation: 0,
-      ),
-      body: Center(
-        child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-          SizedBox(height: 50),
-          Card(
-            elevation: 0,
-            shape: RoundedRectangleBorder(
-              side: BorderSide(
-                color: Theme.of(context).colorScheme.outline,
-              ),
-              borderRadius: const BorderRadius.all(Radius.circular(30)),
-            ),
-            child: const SizedBox(
-              width: 300,
-              height: 100,
-              child: Center(
-                child: Text(
-                  'Outlined Card',
-                  style: TextStyle(
-                    fontFamily: 'bevietnampro',
-                    fontSize: 25,
-                    color: LightBack,
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ]),
-      ),
-      bottomNavigationBar: BottomNavBar(),
     );
   }
 

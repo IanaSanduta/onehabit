@@ -1,7 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:onehabit/Login.dart';
+import 'package:onehabit/Views/Login.dart';
 import 'package:onehabit/Views/Register_%20view.dart';
+import 'package:onehabit/themes/Buttons/button_styles.dart';
 
 import './themes/color.dart';
 import 'firebase_options.dart';
@@ -102,18 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
             MaterialPageRoute(builder: (context) => const Login()),
           );
         },
-        style: ButtonStyle(
-          foregroundColor: MaterialStateProperty.all<Color>(Purple),
-          padding: MaterialStateProperty.all<EdgeInsets>(
-              EdgeInsets.only(left: 40, right: 40, top: 20, bottom: 20)),
-          shape: MaterialStateProperty.all(RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30.0),
-            side: BorderSide(
-              color: Purple,
-              width: 3.0,
-            ),
-          )),
-        ),
+        style: defaultButton(),
         child: const Text("Login"),
       );
 
