@@ -25,31 +25,6 @@ class _DashboardState extends State<Dashboard> {
     Timer_on_dashboard(),
   ];
 
-  /*void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }*/
-/*
-  @override
-  void initState() {
-    super.initState();
-    BackButtonInterceptor.add(myInterceptor);
-  }
-
-  @override
-  void dispose() {
-    BackButtonInterceptor.remove(myInterceptor);
-    super.dispose();
-  }
-
-  bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
-    print("BACK BUTTON!"); // Do some stuff.
-    return true;
-  }
-
- */
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
