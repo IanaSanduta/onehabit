@@ -18,3 +18,10 @@ ButtonStyle defaultButton() {
     ),
   );
 }
+
+Text LoginText() {
+  return const Text(
+    "Login",
+    style: TextStyle(color: LightFont),
+  );
+}
