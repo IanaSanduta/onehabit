@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:onehabit/Dashboard.dart';
 import 'package:onehabit/ForgotPassword.dart';
+import 'package:onehabit/themes/Buttons/button_styles.dart';
+import 'package:onehabit/themes/Views/BackgroundItems.dart';
 import 'package:onehabit/themes/color.dart';
 
 class Login extends StatefulWidget {
@@ -11,6 +13,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  var loginBackgroundColor = BackgroundPurple;
   var styleInput = const TextStyle(color: Purple);
   var _isObscure = true;
 
@@ -30,20 +33,22 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child:
-            Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-          _backButton(),
-          SizedBox(width: 250),
-          Icon(Icons.person, color: Purple, size: 80),
-          const Text(
-            'Login',
-            style: TextStyle(fontFamily: 'outfit', fontSize: 55),
+        child: Container(
+          decoration: LinearBackground(),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              _backButton(),
+              SizedBox(width: 250),
+              Icon(Icons.person, color: Purple, size: 80),
+              LoginText(),
+              email(),
+              password(),
+              loginButton(),
+              forgotPassword(),
+            ],
           ),
-          email(),
-          password(),
-          loginButton(),
-          forgotPassword(),
-        ]),
+        ),
       ),
     );
   }
@@ -73,6 +78,7 @@ class _LoginState extends State<Login> {
             borderSide: BorderSide(color: Purple, width: 3.0),
           ),
           hintText: 'Enter your email',
+          hintStyle: TextStyle(color: LightFont),
           prefixIcon: Icon(
             Icons.email,
             color: Purple,
@@ -95,6 +101,7 @@ class _LoginState extends State<Login> {
             borderSide: BorderSide(color: Purple, width: 3.0),
           ),
           hintText: 'Enter your password',
+          hintStyle: TextStyle(color: LightFont),
           prefixIcon: Icon(
             Icons.lock,
             color: Purple,
@@ -107,26 +114,29 @@ class _LoginState extends State<Login> {
 
   TextButton loginButton() {
     return TextButton(
-      onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const Dashboard()),
-        );
-      },
-      style: ButtonStyle(
-        foregroundColor: MaterialStateProperty.all<Color>(Purple),
-        padding: MaterialStateProperty.all<EdgeInsets>(
-            EdgeInsets.only(left: 40, right: 40, top: 20, bottom: 20)),
-        shape: MaterialStateProperty.all(RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.0),
-          side: BorderSide(
-            color: Purple,
-            width: 3.0,
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const Dashboard()),
+          );
+        },
+        style: ButtonStyle(
+          foregroundColor: MaterialStateProperty.all<Color>(Purple),
+          backgroundColor:
+              MaterialStateProperty.all<Color>(loginBackgroundColor),
+          padding: MaterialStateProperty.all<EdgeInsets>(
+              EdgeInsets.only(left: 40, right: 40, top: 20, bottom: 20)),
+          shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30.0),
+              side: BorderSide(
+                color: Purple,
+                width: 3.0,
+              ),
+            ),
           ),
-        )),
-      ),
-      child: const Text("Login"),
-    );
+        ),
+        child: LoginText());
   }
 
   SizedBox forgotPassword() {

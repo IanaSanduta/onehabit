@@ -8,6 +8,8 @@ const LightFont = const Color(0xFFC5C6CA);
 const Black = const Color(0xFF000000);
 const White = const Color(0xFFFFFFFF);
 
+var BackgroundPurple = const Color.fromRGBO(30, 24, 61, 1);
+var BackgroundPurpleSecondary = const Color.fromRGBO(166, 113, 235, 1);
 const Purple = const Color(0xFF3C2DB0);
 const AccentColor = const Color(0xFFEE8169);
 const TextColor = const Color(0xFF000000);
@@ -37,7 +39,6 @@ class MyTheme {
       cardColor: Purple,
       textSelectionColor: LightBack,
       backgroundColor: White,
-
     );
   }
 }
