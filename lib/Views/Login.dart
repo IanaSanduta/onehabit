@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:onehabit/Dashboard.dart';
 import 'package:onehabit/Models/Authentication_model.dart';
@@ -12,6 +13,20 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   // View variables
+  var _isObscure = true;
+
+  get iconObscure => IconButton(
+        icon: Icon(
+          _isObscure ? Icons.visibility : Icons.visibility_off,
+          color: Purple,
+        ),
+        onPressed: () {
+          setState(() {
+            _isObscure = !_isObscure;
+          });
+        },
+      );
+
   var styleInput = const TextStyle(color: Colors.white);
   var loginButtonColor = MaterialStateProperty.all<Color>(Purple);
   var loginButtonPadding = MaterialStateProperty.all<EdgeInsets>(
@@ -59,10 +74,10 @@ class _LoginState extends State<Login> {
                 loginButton(),
               ],
             ),
-            Visibility(
+            /*Visibility(
               child: errorAlert(),
               visible: !isAuthenticationSuccess,
-            ),
+            ),*/
           ],
         ),
       ),
@@ -73,7 +88,7 @@ class _LoginState extends State<Login> {
     return Row(mainAxisAlignment: MainAxisAlignment.start, children: [
       SizedBox(width: 15),
       IconButton(
-        icon: Icon(Icons.arrow_back, color: Purple, size: 30),
+        icon: Icon(Icons.arrow_back, color: Colors.white, size: 30),
         onPressed: () {
           Navigator.pop(context);
           //ModalRoute.of(context)?.canPop
@@ -103,51 +118,116 @@ class _LoginState extends State<Login> {
         child: const Text("Login"),
       );
 
-  TextField loginTextField(
-          String hintText, TextEditingController textController) =>
+  /*TextField loginTextField(
+          String hintText, TextEditingController textController, bool hide) =>
       TextField(
+        obscureText: hide,
         controller: textController,
         decoration: InputDecoration(
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Purple, width: 4.0),
           ),
           enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Purple, width: 2.0),
+            borderSide: BorderSide(color: Purple, width: 3.0),
           ),
           hintText: hintText,
           prefixIcon: Icon(
             Icons.lock,
             color: Purple,
           ),
+          suffixIcon: iconObscure,
         ),
-      );
+      );*/
 
   Future<void> navigateToDashboard() async {
     //isAuthenticationSuccess = false;
-    isButtonPressed = true;
-    print("Email to authenticate: " + emailController.text);
-    isAuthenticationSuccess = (await Authentication()
-        .signInWithEmail(emailController.text, passwordController.text));
-    if (isAuthenticationSuccess) {
-      isButtonPressed = false;
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const Dashboard()),
+    //isButtonPressed = true;
+    try {
+      print("Email to authenticate: " + emailController.text);
+      isAuthenticationSuccess = (await Authentication()
+          .signInWithEmail(emailController.text, passwordController.text));
+      if (isAuthenticationSuccess) {
+        //isButtonPressed = false;
+
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => Dashboard()),
+          (Route<dynamic> route) => false,
+        );
+        //isAuthenticationSuccess = false;
+      } else {
+        setState(() {});
+        /*signInAlertTitle = "Error signing in...";
+        print("Error signing in... " + errorMessage);*/
+      }
+    } on FirebaseAuthException catch (error) {
+      //Shows a message in case of error.
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+            content: Text(error.message!),
+            duration: const Duration(seconds: 3),
+            backgroundColor: Colors.red.shade900),
       );
-      // isAuthenticationSuccess = false;
-    } else {
-      signInAlertTitle = "Error signing in...";
-      print("Error signing in... " + errorMessage);
     }
   }
 
-  SizedBox password() => SizedBox(
+/*  SizedBox password() => SizedBox(
         width: width,
-        child: loginTextField("Enter your password", passwordController),
-      );
+        child: loginTextField(
+            "Enter your password", passwordController, _isObscure),
+      );*/
 
-  SizedBox email() => SizedBox(
+  /* SizedBox email() => SizedBox(
         width: width,
-        child: loginTextField("Enter your email", emailController),
+        child: loginTextField("Enter your email", emailController, false),
       );
+*/
+
+  SizedBox email() {
+    return SizedBox(
+      width: 280,
+      child: TextField(
+        controller: emailController,
+        decoration: new InputDecoration(
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Purple, width: 4.0),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Purple, width: 3.0),
+          ),
+          hintText: 'Enter your email',
+          prefixIcon: Icon(
+            Icons.email,
+            color: Purple,
+          ),
+        ),
+      ),
+    );
+  }
+
+  SizedBox password() {
+    return SizedBox(
+      width: 280,
+      child: TextFormField(
+        obscureText: _isObscure,
+        controller: passwordController,
+        decoration: new InputDecoration(
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Purple, width: 4.0),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Purple, width: 3.0),
+          ),
+          hintText: 'Enter your password',
+          prefixIcon: Icon(
+            Icons.lock,
+            color: Purple,
+          ),
+          suffixIcon: iconObscure,
+        ),
+      ),
+    );
+  }
+
+  BuildContext get get_context => context;
 }

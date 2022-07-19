@@ -35,8 +35,8 @@ class _DashboardState extends State<Dashboard> {
       ),
       home: Scaffold(
         appBar: AppBar(
-          //automaticallyImplyLeading: false,
-          backgroundColor: Purple,
+          //automaticallyImplyLeading: true,
+          backgroundColor: Colors.black,
           //elevation: 0,
         ),
         body: Center(
