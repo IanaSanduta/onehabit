@@ -57,9 +57,10 @@ class _RegisterViewState extends State<RegisterView> {
         //var isUserRegistered =
         RegistrationModel()
             .registerWithEmail(name.text, email.text, password.text);
-        Navigator.push(
+        Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => const Dashboard()),
+          MaterialPageRoute(builder: (context) => Dashboard()),
+          (Route<dynamic> route) => false,
         );
       } on FirebaseAuthException catch (error) {
         //Shows a message in case of error.
@@ -83,7 +84,7 @@ class _RegisterViewState extends State<RegisterView> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 backButton(),
-                SizedBox(width: 250),
+                SizedBox(width: 150),
                 Icon(Icons.person, color: Purple, size: 80),
                 const Text(
                   'Register',

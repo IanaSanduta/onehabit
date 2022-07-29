@@ -1,19 +1,35 @@
+import 'dart:ui' as ui;
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:onehabit/Login.dart';
 import 'package:onehabit/Views/Register_%20view.dart';
 import 'package:onehabit/themes/Buttons/button_styles.dart';
 import 'package:onehabit/themes/Views/BackgroundItems.dart';
-import 'dart:ui' as ui;
 
 import './themes/color.dart';
+import 'Dashboard.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  //Firebase.initializeApp();
+  runApp(const MyApp());
+
+  // if (Platform.isIOS) {
+  //   await Firebase.initializeApp(
+  //     options: DefaultFirebaseOptions.currentPlatform,
+  //   );
+  // } else {
+  //   await Firebase.initializeApp();
+  // }
+  // await Firebase.initializeApp(
+  //   options: DefaultFirebaseOptions.currentPlatform,
+  // );
 }
 
 class MyApp extends StatelessWidget {
@@ -22,13 +38,19 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'One Habit',
-      theme: MyTheme.defaultTheme,
-      debugShowCheckedModeBanner: false,
-      //primarySwatch: Colors.Purple,,
-      home: const MyHomePage(title: 'One Habit'),
-    );
+    String? firebaseUser = FirebaseAuth.instance.currentUser?.uid;
+
+    if (firebaseUser != null) {
+      return const Dashboard();
+    } else {
+      return MaterialApp(
+        title: 'One Habit',
+        theme: MyTheme.defaultTheme,
+        debugShowCheckedModeBanner: false,
+        //primarySwatch: Colors.Purple,,
+        home: const MyHomePage(title: 'One Habit'),
+      );
+    }
   }
 }
 
