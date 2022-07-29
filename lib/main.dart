@@ -1,12 +1,15 @@
+import 'dart:ui' as ui;
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:onehabit/Login.dart';
 import 'package:onehabit/Views/Register_%20view.dart';
 import 'package:onehabit/themes/Buttons/button_styles.dart';
 import 'package:onehabit/themes/Views/BackgroundItems.dart';
-import 'dart:ui' as ui;
-import 'package:firebase_auth/firebase_auth.dart';
+
 import './themes/color.dart';
+import 'Dashboard.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
