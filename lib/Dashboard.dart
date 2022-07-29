@@ -34,11 +34,6 @@ class _DashboardState extends State<Dashboard> {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: Scaffold(
-        appBar: AppBar(
-          //automaticallyImplyLeading: true,
-          backgroundColor: Colors.black,
-          //elevation: 0,
-        ),
         body: Center(
           child: _widgetOptions.elementAt(_currentIndex),
         ),
